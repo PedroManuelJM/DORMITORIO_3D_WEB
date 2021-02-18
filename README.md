@@ -9,3 +9,5 @@ Visitando un dormitorio , se hace uso de las siguientes librerias Panolen.js y T
 
 #### BAÑO
 ![bañoo](https://user-images.githubusercontent.com/71619972/108408851-8ce8f100-71f3-11eb-81ad-3edb22011dae.png)
+
+LINK: https://pedromanueljm.github.io/DORMITORIO_3D_WEB/
