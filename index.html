@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dormitorio 3D </title>
+</head>
+<style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    #container {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<body>
+    <div id="container"></div>
+    <script src="js/three.min.js"></script>
+    <script src="js/panolens.min.js"></script>
+
+    <script>
+        var panorama, panorama2, viewer, container, infospot;
+
+        var lookAtPositions = [
+            new THREE.Vector3(4871.39, 1088.07, -118.41), /* Posicion al Inicio*/
+            new THREE.Vector3(1278.27, 732.65, 4769.19)
+        ];
+
+        var infospotPositions = [
+           new THREE.Vector3(-236.06, -1450.30, 3740.14), /* posición del icono de la flecha para ir al baño*/
+           new THREE.Vector3(1558.81, 490.50, -7300.13) /* posición del icono de la flecha para salir del baño */
+        ];
+
+        container = document.querySelector('#container');
+        /* creando el panorama del dormitorio */
+        panorama = new PANOLENS.ImagePanorama('img/dormitorio.jpg');
+        panorama.addEventListener('enter-fade-start', function () {
+            viewer.tweenControlCenter(lookAtPositions[0], 0);
+        });
+       /* creando el panorama del baño */
+        panorama2 = new PANOLENS.ImagePanorama('img/baño.jpeg');
+        panorama2.addEventListener('enter', function () {
+            viewer.tweenControlCenter(lookAtPositions[1], 0);
+        });
+
+        panorama.link(panorama2, infospotPositions[0]);
+        panorama2.link(panorama, infospotPositions[1]);
+
+        /* creando los infospot*/
+        infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+        infospot1 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+        infospot2 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+        infospot3 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);  
+        infospot4 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);  
+        infospot5 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);  
+        infospot6 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);  
+        infospot7 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);  
+        infospot8 = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);  
+
+        /* posiciones de los INFO */
+        infospot.position.set(0, -2000, 7490);
+        infospot.addHoverText( 'baño', 30 );
+        
+        infospot1.position.set(0, -2000, -5900);
+        infospot1.addHoverText( 'balcón', 30 );
+
+        infospot2.position.set(7900,850, -5900);
+        infospot2.addHoverText( 'lampara de noche', 30 );
+
+        infospot3.position.set(-3375, -1000, 5500);
+        infospot3.addHoverText( 'ropero de ropa', 30 );
+
+        infospot4.position.set(-9000, -2800, 5500);
+        infospot4.addHoverText( 'zapatos', 30 );
+
+        infospot5.position.set( -8000, 1580, 200);
+        infospot5.addHoverText( 'televisión', 30 );
+
+        infospot6.position.set( -8000, -3880, 2500);
+        infospot6.addHoverText( 'mueble de radio', 30 );
+
+        infospot7.position.set( 8000, -1580, 200);
+        infospot7.addHoverText( 'mueble de cama', 30 );
+
+        infospot8.position.set( 3775, -1000, 5500);
+        infospot8.addHoverText( 'ropero de ropa', 30 );
+
+        /*agregando info*/
+        panorama.add(infospot);
+        panorama.add(infospot1);
+        panorama.add(infospot2);
+        panorama.add(infospot3);
+        panorama.add(infospot4);
+        panorama.add(infospot5);
+        panorama.add(infospot6);
+        panorama.add(infospot7);
+        panorama.add(infospot8);
+
+        viewer = new PANOLENS.Viewer({ output: 'console', container: container });
+        viewer.add(panorama, panorama2);
+
+    </script>
+</body>
+
+</html>
